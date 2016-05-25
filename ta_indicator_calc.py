@@ -1,18 +1,25 @@
 import numpy as numpy
 import talib as ta
 
-def rsi ( quote ):
-    print(quote)
+def rsi ( quote ):    
     rsi = ta.RSI(numpy.array(quote))
     return rsi[-1];
     
 def macd ( quote ):
+    print(quote)
     macddiv, macdsignal, macdhist = ta.MACD(numpy.array(quote), fastperiod=12, slowperiod=26, signalperiod=9)
+    print(macddiv)
+    print(macdsignal)
     return macddiv, macdsignal, macdhist;
+
+def macd_dif ( quote ):
+    macddiv, macdsignal, macdhist = macd(quote)
+    diff = macdsignal - macddiv
+    return diff;
     
-    
+
 def K ( quote ):
-       
+       return 0;
     
 '''
 print(numpy.array(aapl.Close))

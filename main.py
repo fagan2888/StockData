@@ -8,13 +8,14 @@ symbols = ['SIM.CO','GEN.CO', 'AAPL']
 
 
 from stock import GetStockQuote
-from ta_indicator_calc import rsi
+import ta_indicator_calc as ind_calc
+#from ta_indicator_calc import rsi
 for symbol in symbols:
     quote = GetStockQuote(symbol)
     print(symbol)
-    rsi_today = rsi(quote.Close)
-    print(rsi_today)
-    
+    rsi_today = ind_calc.rsi(quote.Close)
+    macd_diff = ind_calc.macd_dif(quote.Close)
+    print(macd_diff)
     
     
     

@@ -5,7 +5,7 @@ import pandas_datareader.data as web
 
 import datetime
 import time
-thirty_days = datetime.date.today() - datetime.timedelta(days=30)
+thirty_days = datetime.date.today() - datetime.timedelta(days=45)
 
 def GetStockQuote( symbol ):
     quote = web.get_data_yahoo(symbol,thirty_days.strftime("%m/%d/%Y"), time.strftime("%m/%d/%Y"))

@@ -17,14 +17,16 @@ def GetKDJRecommendation( kdj ):
         rec = 0
     return rec;
     
-def GetMACDRecommendation( macd ):
-    if (macd < 20):
-        rec = 1
-    elif (macd > 80):
-        rec = -1  
+def GetMACDRecommendation( diff ):
+    if (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] > 0):  
+        macd_cross = 1 
+    elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] <= 0):
+        macd_cross = -1
     else:
-        rec = 0
-    return rec;
+        macd_cross = 0
+    return macd_cross; 
+
+
 
 def GetCandleRecommendation( candle ):
     rec = 0

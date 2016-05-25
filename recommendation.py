@@ -28,7 +28,18 @@ def GetMACDRecommendation( diff ):
 
 
 
-def GetCandleRecommendation( candle ):
+def GetCandleRecommendation( quote ):
+    if quote.Open < quote.Close:
+        upper = quote.High - quote.Close
+        lower = quote.Open - quote.Low
+        candle = quote.Close - quote.Open
+        
+    else:
+        upper = quote.High - quote.Open
+        lower = quote.Close - quote.Low
+        candle = quote.Open - quote.Close
+    
+    
     rec = 0
     return rec;
 

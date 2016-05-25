@@ -7,9 +7,7 @@ def rsi ( quote ):
     
 def macd ( quote ):
     print(quote)
-    macddiv, macdsignal, macdhist = ta.MACD(numpy.array(quote), fastperiod=12, slowperiod=26, signalperiod=9)
-    print(macddiv)
-    print(macdsignal)
+    macddiv, macdsignal, macdhist = ta.MACD(numpy.array(quote), fastperiod=12, slowperiod=26, signalperiod=9)        
     return macddiv, macdsignal, macdhist;
 
 def macd_dif ( quote ):
@@ -17,7 +15,7 @@ def macd_dif ( quote ):
     diff = macdsignal - macddiv
     return diff;
     
-
+# TODO: Find how to write the K part. 
 def K ( quote ):
        return 0;
     

@@ -12,11 +12,9 @@ import ta_indicator_calc as ind_calc
 #from ta_indicator_calc import rsi
 for symbol in symbols:
     quote = GetStockQuote(symbol)
+    print(quote)
     print(symbol)
     rsi_today = ind_calc.rsi(quote.Close)
-    macd_diff = ind_calc.macd_dif(quote.Close)
-    print(macd_diff)
-    
-    
+    macd_diff = ind_calc.macd_dif(quote.Close)   
     
     

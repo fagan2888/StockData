@@ -11,8 +11,14 @@ def macd ( quote ):
 
 def macd_dif ( quote ):
     macddiv, macdsignal, macdhist = macd(quote)
-    diff = macdsignal - macddiv
-    return diff;
+    diff = macddiv - macdsignal
+    if (macddiv[-1] >0 and macdsignal[-1] >0):
+        pos = 1
+    elif (macddiv[-1] <0 and macdsignal[-1] <0):
+        pos = -1
+    else:
+        pos = 0     
+    return diff, pos;
     
 # TODO: Find how to write the K part. 
 def J ( quote ):

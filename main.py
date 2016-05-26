@@ -1,21 +1,23 @@
 #Get the main flow. 
 
 #Defin the symbols
+from recommendation import CleanRecommendation
+#CleanRecommendation("today_recommendation_to_buy.txt")
+#CleanRecommendation("today_recommendation_to_sell.txt")
+
 
 from stock import GetStockSymbol
 # Get the stock quote
-symbols = GetStockSymbol("stocklist.txt") 
-#symbols = ['NORDJB.CO']
+symbols = GetStockSymbol("stocklist.txt") +  GetStockSymbol("stocklist_sto.txt", ".ST")
+symbols = ['MOB.ST']
 
 from stock import GetStockQuote
 import ta_indicator_calc as ind_calc
 from recommendation import GetRecommendation
 from recommendation import WriteRecommendation
-from recommendation import CleanRecommendation
+
 #from ta_indicator_calc import rsi
 
-CleanRecommendation("today_recommendation_to_buy.txt")
-CleanRecommendation("today_recommendation_to_sell.txt")
 for symbol in symbols:
     quote = GetStockQuote(symbol)
     print(symbol)
@@ -31,6 +33,8 @@ for symbol in symbols:
         else:
             print("No last day quote, no recommendation.")        
             rec = 0
+        
+        
         
         if (rec > 2):
             WriteRecommendation(symbol, rec, "today_recommendation_to_buy.txt")

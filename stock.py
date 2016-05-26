@@ -23,11 +23,16 @@ def GetStockQuote( *args ):
         return "NoQuote"
     
 
-def GetStockSymbol(filename):
+def GetStockSymbol(*args):
+    filename = args[0]
+    if (len(args) == 2):
+        market = args[1]
+    else:
+        market = ".CO"
     symbols = []
     file = open(filename, 'r')
     for line in file:
         if line.rstrip():
-            symbol = line.rstrip() + ".CO"
+            symbol = line.rstrip().replace(" ", "-") + market
             symbols.append(symbol) 
     return symbols

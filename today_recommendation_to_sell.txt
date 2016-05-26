@@ -5,3 +5,11 @@
 2016/05/26	SIM.CO has the recommendation of -2.0
 2016/05/26	LL-A.CO has the recommendation of -2.0
 2016/05/26	NRDC.CO has the recommendation of -2.0
+2016/05/26	ATCO-B.ST has the recommendation of -2.0
+2016/05/26	LIFCO-B.ST has the recommendation of -2.0
+2016/05/26	NCC-A.ST has the recommendation of -2.0
+2016/05/26	SKF-A.ST has the recommendation of -2.0
+2016/05/26	FOI-B.ST has the recommendation of -2.3333333333333335
+2016/05/26	TRAC-B.ST has the recommendation of -2.0
+2016/05/26	HMED.ST has the recommendation of -2.0
+2016/05/26	TRENT.ST has the recommendation of -3.0

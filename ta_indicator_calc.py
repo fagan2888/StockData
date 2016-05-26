@@ -6,7 +6,6 @@ def rsi ( quote ):
     return rsi[-1];
     
 def macd ( quote ):
-    print(quote)
     macddiv, macdsignal, macdhist = ta.MACD(numpy.array(quote), fastperiod=12, slowperiod=26, signalperiod=9)        
     return macddiv, macdsignal, macdhist;
 
@@ -16,9 +15,11 @@ def macd_dif ( quote ):
     return diff;
     
 # TODO: Find how to write the K part. 
-def K ( quote ):
-       return 0;
-    
+def J ( quote ):
+    STOCH_K, STOCH_D = ta.STOCH(numpy.array(quote.High), numpy.array(quote.Low), numpy.array(quote.Close),slowk_period=14,slowd_period=3)
+    j = 3 * STOCH_K - 2 * STOCH_D
+    return j[-1];
+       
 '''
 print(numpy.array(aapl.Close))
 #closeprice = ta.SMA(numpy.array(aapl.Close)) # Avoid Argument 'real' has incorrect type (expected numpy.ndarray, got Series) error. 

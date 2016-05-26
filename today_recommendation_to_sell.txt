@@ -1,0 +1,7 @@
+2016/05/26	DFDS.CO has the recommendation of -2.3333333333333335
+2016/05/26	DSV.CO has the recommendation of -2.0
+2016/05/26	GEN.CO has the recommendation of -3.0
+2016/05/26	PNDORA.CO has the recommendation of -3.0
+2016/05/26	SIM.CO has the recommendation of -2.0
+2016/05/26	LL-A.CO has the recommendation of -2.0
+2016/05/26	NRDC.CO has the recommendation of -2.0

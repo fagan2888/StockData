@@ -21,6 +21,7 @@ from stock import GetStockQuote
 import ta_indicator_calc as ind_calc
 from recommendation import GetRecommendation
 from recommendation import WriteRecommendation
+from ReportManager import WriteResultToText
 
 #from ta_indicator_calc import rsi
 
@@ -38,14 +39,23 @@ for symbol in symbols:
             print("Final recommendation of ", symbol , " is ", rec)             
         else:
             print("No last day quote, no recommendation.")        
-            rec = 0
-        
-        
+            rec = 0               
         
         if (rec > 2):
             WriteRecommendation(symbol, rec, "today_recommendation_to_buy.txt")
         elif (rec<=-2):
             WriteRecommendation(symbol, rec, "today_recommendation_to_sell.txt")
+        
+        ''' macd and Candel is not returned'''
+        result = []
+        result.append(symbol)
+        result.append(rsi_today)
+        result.append(macd_diff[-1])
+        result.append(macd_pos)
+        result.append(j)
+        result.append(rec)
+        
+        WriteResultToText('result.txt', result)
         
     else:
         print("No Quote for ", symbol)

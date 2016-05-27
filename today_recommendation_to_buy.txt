@@ -1,2 +1,6 @@
-2016/05/26	HEMF-PREF.ST has the recommendation of 2.1
-2016/05/26	SEAM.ST has the recommendation of 2.1
+2016/05/27	DII.CO has the recommendation of 2.1
+2016/05/27	STRINV.CO has the recommendation of 2.1
+2016/05/27	VIPRO.CO has the recommendation of 2.1
+2016/05/27	KLOV-PREF.ST has the recommendation of 2.1
+2016/05/27	SAAB-B.ST has the recommendation of 2.1
+2016/05/27	VICP-PREF.ST has the recommendation of 2.1

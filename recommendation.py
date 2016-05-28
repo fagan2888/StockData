@@ -1,58 +1,72 @@
 import pandas as pd
 import time
+import math
 
-def GetRSIRecommendation( rsi ):
+def GetRSIRecommendation( rsi ):   
+    '''
+        Use linear between the lower and upper limitation. 
+    '''
     if (rsi < param.rsi_lower):
-        rec = 1
-    elif (rsi < param.rsi_2ndlower):
-        rec = 0.5    
+        rec = 1    
     elif (rsi>param.rsi_upper):
-        rec = -1 
-    elif (rsi > param.rsi_2ndupper):
-        rec = -0.5     
+        rec = -1          
     else:
-        rec = 0
-    print("RSI is ", rsi, " and recommendation is ", rec)    
+        rec = (rsi - param.rsi_lower) / (param.rsi_upper - param.rsi_lower) * -2  + 1         
+    #print("RSI is ", rsi, " and recommendation is ", rec)    
     return rec;
        
 def GetKDJRecommendation( j ):
+    '''
+        Use linear between the lower and upper limitation. 
+    '''
     if (j < param.j_lower):
-        rec = 1
-    elif (j < param.j_2ndlower):
-        rec = 1         
+        rec = 1        
     elif (j > param.j_upper):
-        rec = -1  
-    elif (j > param.j_2ndupper):
-        rec = -0.5  
+        rec = -1        
     else:
-        rec = 0
-    print("J is ", j, " and recommendation is ", rec)
+        rec = (j - param.j_lower) / (param.j_upper - param.j_lower) * -2  + 1
+    #print("J is ", j, " and recommendation is ", rec)
     return rec;
     
 import numpy as numpy
 import parameters as param
 
 def GetMACDRecommendation( diff, pos):
-    if (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] > 0) and pos == 1:  
-        macd_cross = 1   # Gold Cross,  both are positive,  Turn to Bullish
-    if (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] > 0) and pos != 1:  
-        macd_cross = 0.5   # Gold cross, not both are positive Ready to Bullish    
-    elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] <= 0) and pos == 1:
-        macd_cross = -0.5  # Death cross, both are positive, May to Bearish
-    elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] <= 0) and pos != 1:
-        macd_cross = -1  # Death cross, not both are positive, Turn to Bearish,     
-    elif (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] <= 0) and pos !=1:  
-        macd_cross = -1.5 # no cross, macd under signal, not both are positive, deep in a bearish market
-    elif (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] <= 0) and pos ==1:  
-        macd_cross = 0.5 # no cross, macd under signal, both are positive, May turn to a bearish market     
-    elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] > 0) and pos == 1:
-        macd_cross = 1.5  # no cross, macd over signal, both are positive, deep in Bullish market
-    elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] > 0) and pos != 1:
-        macd_cross = -0.5  # no cross, macd over signal, not both are positive, may turn to a Bullish market    
+    ''' 
+    Caclulate the recommendation from the MACD diff
+    return : macd_cross, macd_pos        
+    '''         
+    if (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] > 0):  
+        macd_cross = 1   # Gold Cross           
+    elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] <= 0):
+        macd_cross = -1  # Death cross
+    elif (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] <= 0):
+        if  math.fabs(diff[-1]) >= math.fabs(diff[-3]) :
+            macd_cross = -2   #diff increase in negitive side, the worst case
+        elif math.fabs(diff[-1]) < math.fabs(diff[-3]):
+            macd_cross = 0    #diff decrease in negitive side may turn to good.    
+        else:
+            macd_cross = -2    
+    elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] > 0):        
+        if  diff[-1] >= diff[-3] : #difference increase in positive side, the best case
+            macd_cross = 2  
+        elif diff[-1] < diff[-3]:  #difference decrease in positive side, 
+            macd_cross = 0        
+        else:
+            macd_cross = 1  #   
     else:
         macd_cross = 0
-    print("macd recommendation is ", macd_cross)    
-    return macd_cross; 
+    
+    #print("macd recommendation is ", macd_cross)       
+    
+    if pos == 1:
+        pos_rec = 1
+    elif pos <= 0:
+        pos_rec = 0
+    else:
+        pos_rec = pos
+    #print("macd position recommentdation is ", pos_rec)    
+    return macd_cross, pos_rec; 
 
 def GetCandleRecommendation( quote ):
     open = quote.Open.apply(pd.to_numeric, errors='coerce')
@@ -93,12 +107,16 @@ def GetCandleRecommendation( quote ):
 
 def GetRecommendation(rsi, macd, macd_pos, kdj, quote):
     rsi_r = GetRSIRecommendation(rsi)
-    macd_r = GetMACDRecommendation(macd, macd_pos)
+    macd_r, macd_pos = GetMACDRecommendation(macd, macd_pos)
     kdj_r = GetKDJRecommendation(kdj)
-    candle_r = GetCandleRecommendation(quote)
+    #candle_r = GetCandleRecommendation(quote)
     
-    recommendation = rsi_r + kdj_r + macd_r + candle_r * 1/5
-    return recommendation        
+    indicator = macd_r
+    confidence = macd_pos + (rsi_r + kdj_r) / 2
+    
+    recommendation = indicator * confidence 
+    
+    return recommendation, macd_r, macd_pos        
     
     
 def WriteRecommendation(symbol, rec, filename):

@@ -29,15 +29,18 @@ close = numpy.random.random(100)
 import time
 import datetime
 thirty_days = datetime.date.today() - datetime.timedelta(days=30)
+twenty_days = datetime.date.today() - datetime.timedelta(days=20)
 def GetStockQuote(symbol) :
     quote = web.get_data_yahoo(symbol,thirty_days.strftime("%m/%d/%Y"), time.strftime("%m/%d/%Y"))
+    #quote = web.get_data_yahoo(symbol,thirty_days.strftime("%m/%d/%Y"), twenty_days.strftime("%m/%d/%Y"))
     return quote
+
 
 #from talib import MA_Type
 from talib import MA_Type
 upper, middle, lower = ta.BBANDS(close, matype=MA_Type.T3)
-
 # Own test end
+
 
 aapl = web.get_data_yahoo("GEN.CO",'1/1/2016', '5/20/2016')
 #appl = web.get_data_google("GEN",'1/1/2016', '5/20/2016')

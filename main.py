@@ -52,7 +52,7 @@ CleanRecommendation("today_recommendation_to_sell.txt")
 
 from stock import GetStockSymbol
 # Get the stock quote
-symbols = GetStockSymbol("stocklist.txt") +  GetStockSymbol("stocklist_sto.txt", ".ST")
+symbols = GetStockSymbol("stocklist.txt", ".CO") +  GetStockSymbol("stocklist_as.txt")
 #symbols = ['GEN.CO', 'SAS-DKK.CO']
 
 from stock import GetStockQuote

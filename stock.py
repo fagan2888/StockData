@@ -42,7 +42,7 @@ def GetStockSymbol(*args):
     if (len(args) == 2):
         market = args[1]
     else:
-        market = ".CO"
+        market = ""
     symbols = []
     file = open(filename, 'r')
     for line in file:

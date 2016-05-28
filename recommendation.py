@@ -37,23 +37,27 @@ def GetMACDRecommendation( diff, pos):
     return : macd_cross, macd_pos        
     '''         
     if (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] > 0):  
-        macd_cross = 1   # Gold Cross           
+        macd_cross = 1.2   # Gold Cross,            
     elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] <= 0):
-        macd_cross = -1  # Death cross
+        macd_cross = -1.2  # Death cross
     elif (diff[-3] <=0) and (diff[-2] <= 0) and (diff[-1] <= 0):
         if  math.fabs(diff[-1]) >= math.fabs(diff[-3]) :
             macd_cross = -2   #diff increase in negitive side, the worst case
         elif math.fabs(diff[-1]) < math.fabs(diff[-3]):
-            macd_cross = 0    #diff decrease in negitive side may turn to good.    
+            macd_cross = -0.5    #diff decrease in negitive side may turn to good.    
         else:
             macd_cross = -2    
     elif (diff[-3] >0) and (diff[-2] > 0) and (diff[-1] > 0):        
         if  diff[-1] >= diff[-3] : #difference increase in positive side, the best case
             macd_cross = 2  
         elif diff[-1] < diff[-3]:  #difference decrease in positive side, 
-            macd_cross = 0        
+            macd_cross = 0.5        
         else:
-            macd_cross = 1  #   
+            macd_cross = 1  #
+    elif (diff[-3] >0) and (diff[-2] < 0) and (diff[-1] > 0):
+        macd_cross = 1 #Gold cross but ossilation
+    elif (diff[-3] <0) and (diff[-2] > 0) and (diff[-1] < 0):
+        macd_cross = -1  #Gold cross but ossilation                 
     else:
         macd_cross = 0
     

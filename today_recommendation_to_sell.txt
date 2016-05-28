@@ -1,5 +1,5 @@
 2016/05/28	NZYM-B.CO has the recommendation of -1.58141154399
-2016/05/28	WDH.CO has the recommendation of -1.65264177784
+2016/05/28	WDH.CO has the recommendation of -1.4787594651
 2016/05/28	ARKIL-B.CO has the recommendation of -1.5772584466
 2016/05/28	CPHNW.CO has the recommendation of -2.22807880636
 2016/05/28	DII.CO has the recommendation of -2.7602653344
@@ -11,6 +11,7 @@
 2016/05/28	NRDC.CO has the recommendation of -1.05380412086
 2016/05/28	SKAKO.CO has the recommendation of -1.28525226807
 2016/05/28	SPEAS.CO has the recommendation of -1.53374238783
+2016/05/28	TKDV.CO has the recommendation of -1.11247763815
 2016/05/28	KPN.AS has the recommendation of -1.00482870051
 2016/05/28	PHIA.AS has the recommendation of -1.05681477279
 2016/05/28	VPK.AS has the recommendation of -1.69358395711

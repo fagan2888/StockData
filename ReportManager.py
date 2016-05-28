@@ -56,13 +56,13 @@ def GetCellColorCode(*args):
     if type == param.MACD_TYPE:
         if value == 2:
             bgcolor = param.COLORCODE_OUTSTANDINGSIGN
-        elif value == 1:
+        elif value == 1 or value == 1.2:
             bgcolor = param.COLORCODE_GOODSIGN
-        elif value == 0:
+        elif value == 0 or value == 0.5:
             bgcolor = param.COLORCODE_WATCHSIGN
-        elif value == -1:
+        elif value == -1 or value == -0.5:
             bgcolor = param.COLORCODE_WARNINGSIGN 
-        elif value == -1:
+        elif value == -2 or value == -1.2:
             bgcolor = param.COLORCODE_QUITSIGN            
         else:
             bgcolor = param.COLORCODE_NEUTURALSIGN 

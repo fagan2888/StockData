@@ -42,37 +42,44 @@ upper, middle, lower = ta.BBANDS(close, matype=MA_Type.T3)
 # Own test end
 
 
+import pandas_datareader.data as web
+from pandas.io.data import _yahoo_codes
+
+a=web.get_quote_yahoo("MSFT")
+b=_yahoo_codes.update({'MarketCap' : 'j1'})
+print(a)
+print(b)
+
+a=web.get_quote_yahoo("GEN.CO")
+b=_yahoo_codes.update({'52WeekLow' : 'j'})
+print(a)
+print(b)
+
+print("stop")
+
 aapl = web.get_data_yahoo("GEN.CO",'1/1/2016', '5/20/2016')
 #appl = web.get_data_google("GEN",'1/1/2016', '5/20/2016')
 #print(aapl.Close) # get all close price
 
-print(numpy.array(aapl.Close))
 #closeprice = ta.SMA(numpy.array(aapl.Close)) # Avoid Argument 'real' has incorrect type (expected numpy.ndarray, got Series) error. 
 sma = ta.SMA(numpy.array(aapl.Close))
-print(sma)
 rsi = ta.RSI(numpy.array(aapl.Close))
-print(rsi)
 
 macddiv, macdsignal, macdhist = ta.MACD(numpy.array(aapl.Close), fastperiod=12, slowperiod=26, signalperiod=9)
 
 cross = macdsignal - macddiv
 
-print("MACD cross is ")
-print(cross)
-
- 
 
 
-print("stop")
 
-aapl = Options('aapl', 'yahoo')
-data = aapl.get_all_data()
-data.iloc[0:5, 0:5]
+#aapl = Options('aapl', 'yahoo')
+#data = aapl.get_all_data()
+#data.iloc[0:5, 0:5]
 
 #MyYahoo = web.yahoo.quotes.YahooQuotesReader('AAPL', '5/1/2014', '5/2/2014')
 #MyYahoo = web.yahoo.quotes('AAPL', '5/1/2014', '5/2/2014')
 
-print ("AAPL is " + MyYahoo )
+
 
 # Create some sample data to plot.
 all_data = {}

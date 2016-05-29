@@ -65,7 +65,42 @@ def GetCellColorCode(*args):
         elif value == -2 or value == -1.2:
             bgcolor = param.COLORCODE_QUITSIGN            
         else:
-            bgcolor = param.COLORCODE_NEUTURALSIGN 
+            bgcolor = param.COLORCODE_NEUTURALSIGN
+    elif type == param.ADX_TYPE:
+        if value == 2:
+            bgcolor = param.COLORCODE_OUTSTANDINGSIGN
+        elif value == 1:
+            bgcolor = param.COLORCODE_GOODSIGN
+        elif value == 0:
+            bgcolor = param.COLORCODE_WATCHSIGN
+        elif value == -1:
+            bgcolor = param.COLORCODE_WARNINGSIGN 
+        elif value == -2:
+            bgcolor = param.COLORCODE_QUITSIGN            
+        else:
+            bgcolor = param.COLORCODE_NEUTURALSIGN         
+    elif type == param.ADX_REC_TYPE:
+        if value >= 25:
+            bgcolor = param.COLORCODE_GOODSIGN
+        else:
+            bgcolor = param.COLORCODE_WARNINGSIGN
+    elif type == param.ADXR_TYPE:
+        if value >= 50:
+            bgcolor = param.COLORCODE_WARNINGSIGN
+        elif value >= 45:
+            bgcolor = param.COLORCODE_WATCHSIGN
+        elif value >= 40:
+            bgcolor = param.COLORCODE_GOODSIGN
+        elif value >= 35:
+            bgcolor = param.COLORCODE_OUTSTANDINGSIGN        
+        elif value >= 30:
+            bgcolor = param.COLORCODE_OUTSTANDINGSIGN
+        elif value >= 25:
+            bgcolor = param.COLORCODE_GOODSIGN
+        elif value >= 20:
+            bgcolor = param.COLORCODE_WATCHSIGN
+        else:
+            bgcolor = param.COLORCODE_WARNINGSIGN                   
     elif type == param.MACD_POS_TYPE:
         if value == 1:
             bgcolor = param.COLORCODE_OUTSTANDINGSIGN

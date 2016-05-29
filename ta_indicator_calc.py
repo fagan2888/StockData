@@ -1,5 +1,6 @@
 import numpy as numpy
 import talib as ta
+import Helpers as helper
 
 def rsi ( quote ):    
     rsi = ta.RSI(numpy.array(quote))
@@ -29,3 +30,50 @@ def J ( quote ):
     STOCH_K, STOCH_D = ta.STOCH(numpy.array(quote.High), numpy.array(quote.Low), numpy.array(quote.Close),slowk_period=14,slowd_period=3)
     j = 3 * STOCH_K - 2 * STOCH_D
     return j[-1];
+    
+    
+def ADX ( quote ) :  
+    '''
+    Calculate the ADX and its trend (trend calculated by use SMA)
+    '''
+    high = numpy.array(quote.High)
+    low = numpy.array(quote.Low)
+    close = numpy.array(quote.Close)
+    adx = helper.RemoveNaN(ta.ADX(high, low, close))
+    adx_trend = helper.RemoveNaN(ta.SMA(adx))
+    
+    #print("ADX is ", adx)
+    #print("ADX Trend is ", adx_trend)
+    return adx, adx_trend
+    
+def ADXR (quote):
+    '''
+    Calculate the ADXR and its trend (trend calculated by use SMA)
+    '''
+    high = numpy.array(quote.High)
+    low = numpy.array(quote.Low)
+    close = numpy.array(quote.Close)
+    #ADXR is (adx + adx_previous)/2, but not in talib, where ADXR is unknown.
+    #https://www.linnsoft.com/techind/adxr-avg-directional-movement-rating
+    adxr = helper.RemoveNaN(ta.ADXR(high, low, close))    
+    #adxr_trend = helper.RemoveNaN(ta.SMA(adxr))
+    #print("ADXR is ", adxr)
+    #print("ADXR Trend is ", adxr_trend)
+    return adxr
+
+def BullBearPower(quote):
+    '''
+    Calculate the Bullpower and bearpower
+    '''     
+    close = numpy.array(quote.Close)         
+    ema13 = helper.RemoveNaN(ta.EMA(close, timeperiod=13))            
+    
+    high =  numpy.array(quote.High)[-(len(ema13)+1) :-1]   
+    low =  numpy.array(quote.Low)[-(len(ema13)+1) :-1]   
+    
+    bullpower = high - ema13
+    bearpower = low - ema13
+    
+    print(bullpower)
+    print(bearpower)
+    return bullpower, bearpower

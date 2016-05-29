@@ -8,7 +8,7 @@ def GetRSIRecommendation( rsi ):
     '''
     if (rsi < param.rsi_lower):
         rec = 1    
-    elif (rsi>param.rsi_upper):
+    elif (rsi > param.rsi_upper):
         rec = -1          
     else:
         rec = (rsi - param.rsi_lower) / (param.rsi_upper - param.rsi_lower) * -2  + 1         
@@ -27,6 +27,99 @@ def GetKDJRecommendation( j ):
         rec = (j - param.j_lower) / (param.j_upper - param.j_lower) * -2  + 1
     #print("J is ", j, " and recommendation is ", rec)
     return rec;
+ 
+         
+def GetADXRecommendation( adx, adx_trend):
+    '''
+    Get the recommendation from ADX indicator, and the trend of ADX (SMA of ADX)
+    http://www.tradingsetupsreview.com/secret-using-adx-indicator/
+    '''    
+    if (adx[-1] >= 25):   
+        #In Bullish market     
+        if (adx[-2] < 25): 
+            # Up-Cross: 25 line 
+            if adx_trend[1] < adx_trend[-1] and max(adx_trend) == adx_trend[-1]:
+                #indicate a strong rising , Strong Buy
+                adx_rec = 2
+            if adx_trend[1] < adx_trend[-1] :
+                #indicate a possible rising , Buy
+                adx_rec = 1
+            else:          
+                #undecisive, possible in the decrese trend. better to hold.
+                adx_rec = 0
+        else: 
+            #Already in Bullish market
+            if adx_trend[1] > adx_trend[-1] : 
+                # Trend is down, sell signal.
+                adx_rec = -1
+            elif adx_trend[1] < adx_trend[-1] and max(adx_trend) == adx_trend[-1]:
+                #still indicate a strong rising , but already in bullish market Buy
+                adx_rec = 1     
+            else:
+                # Trend is still up, but not clear, hold now.
+                adx_rec = 0                                     
+    else:       
+        # In berish market
+        if adx[-2] >= 25:
+            # Down Cross 25 line
+            if adx_trend[1] > adx_trend[-1] and min(adx_trend) == adx_trend[-1]:
+                #indicate a strong down treand , Strong sell
+                adx_rec = -2
+            elif adx_trend[1] > adx_trend[-1] :
+                #indicate a possible down treand , sell
+                adx_rec = -1    
+            else:         
+                #may in the wave, not clear trend, undecisive.          
+                adx_rec = 0  
+        else:
+            #Already in bearish 
+            if adx_trend[1] < adx_trend[-1] and max(adx_trend) == adx_trend[-1]:
+                #indicate a strong rising now , buy
+                adx_rec = 1           
+            elif adx_trend[1] < adx_trend[-1] :
+                #indicate a possible rising now , hold
+                adx_rec = 0               
+            else:
+                # indicate in bearish market, and going down. Quit
+                adx_rec = -2       
+    return adx_rec    
+
+def GetADXRRecommendation (adxr):
+    '''
+    https://www.google.dk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwib16mP1P_MAhWGE5oKHfu7DOUQFggqMAI&url=http%3A%2F%2Fwww.swing-trade-stocks.com%2FADX-indicator.html&usg=AFQjCNHqhIPV9hlqKUKnfTlMELYFcIirjg&sig2=peI9AVCq265w9DPJPTIQAg&bvm=bv.123325700,d.bGs
+    '''
+    if (adxr >= param.adxr_toohot):
+        #too hot, sell
+        adxr_r = -1
+    elif (adxr >= param.adxr_hot):
+        #hot, may sell
+        adxr_r = 0 - (adxr - param.adxr_hot) / (param.adxr_toohot - param.adxr_hot)       
+    elif (adxr >= param.adxr_warm):
+        #a bit warming, hold and watch
+        adxr_r = 1 - (adxr - param.adxr_warm) / (param.adxr_hot - param.adxr_warm)
+    elif adxr >= param.adxr_best:        
+        #Buy
+        adxr_r = 2 - (adxr - param.adxr_best) / (param.adxr_warm - param.adxr_best)
+    elif adxr >= param.adxr_good:        
+        #Buy
+        adxr_r = 1 + (adxr - param.adxr_good) / (param.adxr_best - param.adxr_good)
+    elif adxr >= param.adxr_watch:
+        #Still cold, hold and watch
+        adxr_r = 0 + (adxr - param.adxr_watch) / (param.adxr_good - param.adxr_watch)
+    elif adxr >= param.adxr_warning:
+        #cold, may sell
+        adxr_r = -1 + (adxr - param.adxr_watch) / (param.adxr_watch - param.adxr_warning)
+    else:
+        #No touch
+        adxr_r = -1
+    return adxr_r*0.5 #normalize
+
+def GetElderRayRecommendation(bullpower, bearpower):
+    '''
+    http://www.investopedia.com/articles/trading/03/022603.asp    
+    '''
+    
+    return 0
     
 import numpy as numpy
 import parameters as param
@@ -109,14 +202,26 @@ def GetCandleRecommendation( quote ):
     print("Candle recommendation is ", rec)
     return rec;
 
-def GetRecommendation(rsi, macd, macd_pos, kdj, quote):
+def GetRecommendation(*args):    
+    rsi = args[0]
+    macd = args[1]
+    macd_pos = args[2]
+    kdj = args[3]
+    #adx = args[4]
+    #adx_trend = args[5]
+    adxr = args[4]
+    quote = args[5]    
+    
     rsi_r = GetRSIRecommendation(rsi)
     macd_r, macd_pos = GetMACDRecommendation(macd, macd_pos)
     kdj_r = GetKDJRecommendation(kdj)
+    adxr_r = GetADXRRecommendation(adxr)
+    #adx_r = GetADXRecommendation(adx, adx_trend)
     #candle_r = GetCandleRecommendation(quote)
     
+    #indicator = (macd_r + adx_r) / 2
     indicator = macd_r
-    confidence = macd_pos + (rsi_r + kdj_r) / 2
+    confidence = macd_pos + (rsi_r + kdj_r + adxr_r) / 3
     
     recommendation = indicator * confidence 
     

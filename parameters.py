@@ -1,14 +1,31 @@
+QUOTE_LENGTH = 100
+
 rsi_upper = 80
 rsi_lower = 20
 
 j_upper = 90
 j_lower = 10
 
+adxr_toohot = 50 #-1
+adxr_hot = 45     #0
+adxr_warm = 40   #1
+adxr_best = 35   #2 
+adxr_good = 30   #1
+adxr_watch = 25  #0
+adxr_warning =20 #-1
+ 
+
 MACD_TYPE = "MACD_R"
 MACD_POS_TYPE = "MACD_POS"
 RSI_TYPE = "RSI"
 J_TYPE = "KDJ"
+ADX_TYPE = "ADX"
+ADX_REC_TYPE = "ADX_R"
+ADXR_TYPE = "ADXR"
+ADXR_REC_TYPE = "ADXR_R"
 RECOMMENDATION_TYPE = "REC"
+
+
 
 HTML_REPORT_FILENAME = "FullReport.html"
 

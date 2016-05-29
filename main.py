@@ -7,10 +7,12 @@ Implement ADXR and applied into confidence.
 Implement ADX and its trend check to recommendation, but not applied
 bull power and bear power is implemented, but not applied. 
 Implement the volumn detect
+
 '''
 
 import ta_indicator_calc as ind_calc
 from recommendation import GetRecommendation
+import parameters as param
 
 def CalculateRecommendation(*args):
     '''
@@ -57,21 +59,23 @@ def CalculateRecommendation(*args):
 
 #Create a blank file
 from recommendation import CleanRecommendation
-CleanRecommendation("today_recommendation_to_buy.txt")
-CleanRecommendation("today_recommendation_to_sell.txt")
+CleanRecommendation(param.BUYLIST)
+CleanRecommendation(param.SELLLIST)
 
 
 # Get the symbols from the text files.
 from stock import GetStockSymbol
-symbols = GetStockSymbol("stocklist.txt", ".CO") +  GetStockSymbol("stocklist_as.txt")
+symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS)
+porto_symbols = GetStockSymbol(param.MYPF)
 #symbols = ['DII.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO'] 
 
 from stock import GetStockQuote
 from recommendation import WriteRecommendation
 import ReportManager as rm
-import parameters as param
+
 
 rm.CreateHTMLFile(param.HTML_REPORT_FILENAME)   #Create the header part of HTML report
+rm.CreateHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
 
 for symbol in symbols:    
     print(symbol)        
@@ -80,9 +84,9 @@ for symbol in symbols:
     macd_r, macd_pos, rsi, j, adxr, rec = CalculateRecommendation(quote)  # Today's recommendation
     
     if (rec > 1):
-        WriteRecommendation(symbol, rec, "today_recommendation_to_buy.txt")   # Only write those may buy
+        WriteRecommendation(symbol, rec, param.BUYLIST)   # Only write those may buy
     elif (rec<=-1):
-        WriteRecommendation(symbol, rec, "today_recommendation_to_sell.txt")  # only write those need sell.         
+        WriteRecommendation(symbol, rec, param.SELLLIST)  # only write those need sell.         
 
     quote_1 = GetStockQuote(symbol, param.QUOTE_LENGTH + 1, 1)
     macd_r_1, macd_pos_1, rsi_1, j_1, adxr_1, rec_1 = CalculateRecommendation(quote_1, 2)
@@ -100,17 +104,31 @@ for symbol in symbols:
     
     line = [symbol, param.MACD_TYPE, macd_r , macd_r_1, macd_r_2 , macd_r_3 , macd_r_4]
     rm.AddLineToHTMLTable(param.HTML_REPORT_FILENAME, line)
+    if symbol in porto_symbols:
+        rm.AddLineToHTMLTable(param.HTML_PORTOFOLIO_REPORT_FULLNAME, line)
     line = [symbol, param.MACD_POS_TYPE, macd_pos , macd_pos_1 , macd_pos_2 , macd_pos_3,macd_pos_4]
     rm.AddLineToHTMLTable(param.HTML_REPORT_FILENAME, line)    
+    if symbol in porto_symbols:
+        rm.AddLineToHTMLTable(param.HTML_PORTOFOLIO_REPORT_FULLNAME, line)
     line = [symbol, param.ADXR_TYPE, adxr , adxr_1 , adxr_2 , adxr_3,adxr_4]
     rm.AddLineToHTMLTable(param.HTML_REPORT_FILENAME, line)    
+    if symbol in porto_symbols:
+        rm.AddLineToHTMLTable(param.HTML_PORTOFOLIO_REPORT_FULLNAME, line)
     line = [symbol, param.RSI_TYPE, rsi , rsi_1 , rsi_2 , rsi_3 , rsi_4]          
     rm.AddLineToHTMLTable(param.HTML_REPORT_FILENAME, line)    
+    if symbol in porto_symbols:
+        rm.AddLineToHTMLTable(param.HTML_PORTOFOLIO_REPORT_FULLNAME, line)
     line = [symbol, param.J_TYPE, j , j_1 , j_2 , j_3 , j_4]
     rm.AddLineToHTMLTable(param.HTML_REPORT_FILENAME, line)
+    if symbol in porto_symbols:
+        rm.AddLineToHTMLTable(param.HTML_PORTOFOLIO_REPORT_FULLNAME, line)
     line = [symbol, param.RECOMMENDATION_TYPE, rec , rec_1 , rec_2 , rec_3 , rec_4]
     rm.AddLineToHTMLTable(param.HTML_REPORT_FILENAME, line)    
-    
-    
+    if symbol in porto_symbols:
+        rm.AddLineToHTMLTable(param.HTML_PORTOFOLIO_REPORT_FULLNAME, line)        
     
 rm.CloseHTMLFile(param.HTML_REPORT_FILENAME)  # write the rest of HTML.  
+rm.CloseHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
+
+from ftpupload import UploadFileToFTP
+UploadFileToFTP() 

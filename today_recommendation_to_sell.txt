@@ -1,5 +1,5 @@
 2016/05/29	NZYM-B.CO has the recommendation of -1.3722290316
-2016/05/29	WDH.CO has the recommendation of -1.33042357015
+2016/05/29	WDH.CO has the recommendation of -1.54980992414
 2016/05/29	CPHNW.CO has the recommendation of -1.59760117566
 2016/05/29	DII.CO has the recommendation of -3.01248805866
 2016/05/29	EXQ.CO has the recommendation of -1.31818095329

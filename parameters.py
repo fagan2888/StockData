@@ -25,9 +25,20 @@ ADXR_TYPE = "ADXR"
 ADXR_REC_TYPE = "ADXR_R"
 RECOMMENDATION_TYPE = "REC"
 
+STOCKLIST_CPH = "stocklist.txt"
+CPHEXCHANGE = ".CO"
+STOCKLIST_STO = "stocklist_sto.txt"
+STOEXCHANGE = ".ST"
+STOCKLIST_AMS = "stocklist_as.txt"
+MYPF = "portofolio.txt"
+
+BUYLIST = "today_recommendation_to_buy.txt"
+SELLLIST = "today_recommendation_to_sell.txt"
 
 
 HTML_REPORT_FILENAME = "FullReport.html"
+HTML_PORTOFOLIO_REPORT_FULLNAME = "PortfolioReport.html"
+FTP_INFO_FILE = "ftpinfo.txt"
 
 COLORCODE_REC_STRONGBUY = """BGCOLOR=#006600"""  #DARK GREEN
 COLORCODE_REC_BUY = """BGCOLOR=#006699"""  #DARK BLUE 

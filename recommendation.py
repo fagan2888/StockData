@@ -86,7 +86,8 @@ def GetADXRecommendation( adx, adx_trend):
 
 def GetADXRRecommendation (adxr):
     '''
-    https://www.google.dk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwib16mP1P_MAhWGE5oKHfu7DOUQFggqMAI&url=http%3A%2F%2Fwww.swing-trade-stocks.com%2FADX-indicator.html&usg=AFQjCNHqhIPV9hlqKUKnfTlMELYFcIirjg&sig2=peI9AVCq265w9DPJPTIQAg&bvm=bv.123325700,d.bGs
+    Only conside the absolute value of ADX, but use ADXR to consider a bit trend. 
+    Based on http://www.swing-trade-stocks.com/ADX-indicator.html
     '''
     if (adxr >= param.adxr_toohot):
         #too hot, sell

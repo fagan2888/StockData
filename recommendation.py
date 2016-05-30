@@ -253,10 +253,10 @@ def Strategy_indicator_times_confidence( *args):
     RSI, J%, ADXR use linear distribute to calculate.  
     '''
     macd_r = args[0]
-    macd_pos = agrs[1]
+    macd_pos = args[1]
     rsi_r = args[2]
     kdj_r = args[3]
-    adx_r = args[4]
+    adxr_r = args[4]
     
     indicator = macd_r
     confidence = macd_pos + (rsi_r + kdj_r + adxr_r) / 3

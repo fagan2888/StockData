@@ -6,7 +6,8 @@ def UploadFileToFTP ():
         file = open(param.FTP_INFO_FILE, "r")
         ftpinfo = []
         for line in file:
-            ftpinfo.append(line)
+            ftpinfo.append(line.rstrip())
+        print(ftpinfo)
         session = FTP(host = ftpinfo[0], user = ftpinfo[1], passwd=ftpinfo[2])
         file = open(param.HTML_PORTOFOLIO_REPORT_FULLNAME,'rb')                  # file to send
         cmd = "STOR " + param.HTML_PORTOFOLIO_REPORT_FULLNAME
@@ -20,4 +21,3 @@ def UploadFileToFTP ():
     except Exception as err:        
         print("FTP load failed: {0}".format(err))
         
-    

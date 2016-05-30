@@ -30,7 +30,7 @@ CPHEXCHANGE = ".CO"
 STOCKLIST_STO = "stocklist_sto.txt"
 STOEXCHANGE = ".ST"
 STOCKLIST_AMS = "stocklist_as.txt"
-MYPF = "portofolio.txt"
+MYPF = "portfolio.txt"
 
 BUYLIST = "today_recommendation_to_buy.txt"
 SELLLIST = "today_recommendation_to_sell.txt"

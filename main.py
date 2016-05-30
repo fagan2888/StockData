@@ -8,6 +8,15 @@ Implement ADX and its trend check to recommendation, but not applied
 bull power and bear power is implemented, but not applied. 
 Implement the volumn detect
 
+Need condiser the back testing. 
+When to buy a stock. 
+When to sell a stock.
+
+Profit / Loss if followe the strategy. 
+
+e.g. When recommendation > 1.5 buy stock at the high of next day. 
+     Watch and when recommendation < -0.5 sell that stock at the low of next day. 
+     transaction is fixed at 30.  
 '''
 
 import ta_indicator_calc as ind_calc

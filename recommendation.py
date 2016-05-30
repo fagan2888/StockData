@@ -221,11 +221,9 @@ def GetRecommendation(*args):
     #candle_r = GetCandleRecommendation(quote)
     
     #indicator = (macd_r + adx_r) / 2
-    indicator = macd_r
-    confidence = macd_pos + (rsi_r + kdj_r + adxr_r) / 3
     
-    recommendation = indicator * confidence 
-    
+    recommendation = Strategy_indicator_times_confidence(macd_r, macd_pos, rsi_r, kdj_r, adxr_r)
+        
     return recommendation, macd_r, macd_pos        
     
     
@@ -241,3 +239,31 @@ def WriteRecommendation(symbol, rec, filename):
 def CleanRecommendation(filename):
     file = open(filename, 'w')
     file.close()
+    
+def Strategy_indicator_times_confidence( *args):
+    '''
+    Recommendation = indicator * confidence 
+    
+    Value from [-2 : 2]
+    
+    Use MACD as main indicator. 
+    The shape of MACD is important, 
+    the value of MACD and MACD signal use are main contributor of confidence. 
+    RSI, J% in KDJ, and ADXR provide additional confidence. 
+    RSI, J%, ADXR use linear distribute to calculate.  
+    '''
+    macd_r = args[0]
+    macd_pos = agrs[1]
+    rsi_r = args[2]
+    kdj_r = args[3]
+    adx_r = args[4]
+    
+    indicator = macd_r
+    confidence = macd_pos + (rsi_r + kdj_r + adxr_r) / 3
+    
+    recommendation = indicator * confidence 
+    return recommendation
+    
+def Strategy_Ongoing(*args):
+    
+    return 0

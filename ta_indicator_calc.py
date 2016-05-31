@@ -77,3 +77,24 @@ def BullBearPower(quote):
     print(bullpower)
     print(bearpower)
     return bullpower, bearpower
+    
+
+def Minus_DI (quote) : 
+    '''
+    Calculate -DI
+    '''
+    
+    minus_di = ta.MINUS_DI(numpy.array(quote.High), numpy.array(quote.Low), numpy.array(quote.Close), timeperiod=14)
+    
+    return minus_di 
+    
+def Plus_DI (quote) : 
+    '''
+    Calculate +DI
+    '''
+    
+    plus_di = ta.PLUS_DI(numpy.array(quote.High), numpy.array(quote.Low), numpy.array(quote.Close), timeperiod=14)
+    
+    return plus_di 
+    
+        

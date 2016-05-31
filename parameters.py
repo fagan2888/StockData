@@ -38,7 +38,7 @@ SELLLIST = "today_recommendation_to_sell.txt"
 
 HTML_REPORT_FILENAME = "FullReport.html"
 HTML_PORTOFOLIO_REPORT_FULLNAME = "PortfolioReport.html"
-FTP_INFO_FILE = "ftpinfo.txt"
+FTP_INFO_FILE = "ftpinfo.yaml"
 
 COLORCODE_REC_STRONGBUY = """BGCOLOR=#006600"""  #DARK GREEN
 COLORCODE_REC_BUY = """BGCOLOR=#006699"""  #DARK BLUE 

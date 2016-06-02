@@ -17,15 +17,17 @@ def UploadFileToFTP ():
                 print(exc)        
         session = FTP(host = ftpinfo['host'], user = ftpinfo['login']['un'], passwd=ftpinfo['login']['pw'])
         session.cwd(ftpinfo['dir'])
-        file = open(param.HTML_PORTOFOLIO_REPORT_FULLNAME,'rb')                  # file to send
-        cmd = "STOR " + param.HTML_PORTOFOLIO_REPORT_FULLNAME
-        session.storbinary(cmd, file)     # send the file
-        file.close()                                    # close file and FTP
-        file = open(param.HTML_REPORT_FILENAME,'rb')                  # file to send
-        cmd = "STOR " + param.HTML_REPORT_FILENAME
-        session.storbinary(cmd, file)     # send the file
-        file.close()                                    # close file and FTP
+        UploadFile(param.HTML_REPORT_FILENAME, session)
+        UploadFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME, session)
+        UploadFile(param.BUYLIST, session)
+        UploadFile(param.SELLLIST,session)        
         session.quit()
     except Exception as err:        
         print("FTP load failed: {0}".format(err))
-        
+    
+    
+def UploadFile(filename, session):        
+    file = open(filename,'rb')                  # file to send
+    cmd = "STOR " + filename
+    session.storbinary(cmd, file)     # send the file
+    file.close()

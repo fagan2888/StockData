@@ -11,7 +11,6 @@ Implement the volumn detect
 Need condiser the back testing. 
 When to buy a stock. 
 When to sell a stock.
-Only get the quote once, but by shift the dataframe.
 
 Profit / Loss if followe the strategy. 
 
@@ -54,7 +53,6 @@ def CalculateRecommendation(*args):
         #adx, adx_trend = ind_calc.ADX(quote)
         if len(ind_calc.ADXR(quote)) > 1:
             adxr = ind_calc.ADXR(quote)[-1]
-        #quote_lastday = GetStockQuote(symbol,data_shift, data_shift)
         quote_lastday = quote.iloc[-1]        
         if not(isinstance(quote_lastday, str)):
             rec, macd_r, macd_pos = GetRecommendation(rsi_today,macd_diff,macd_pos, j, adxr,quote_lastday)  

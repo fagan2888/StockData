@@ -23,11 +23,14 @@ def GetStockQuote( *args ):
             symbol = args[0]
             startdate = datetime.date.today() - datetime.timedelta(days=args[1]) #Need enough days for MACD calculation
             enddate = datetime.date.today() - datetime.timedelta(days=args[2])            
-            quote = web.get_data_yahoo(symbol,startdate.strftime("%m/%d/%Y"), enddate.strftime("%m/%d/%Y"))     
+            quote = web.get_data_yahoo(symbol,startdate.strftime("%m/%d/%Y"), enddate.strftime("%m/%d/%Y"))             
+        
+        print("Last day close is " , quote.Close[-1])
+        
         return quote;    
     except Exception  as identifier:
         symbol = args[0]
-        print("Cannot get the quote for ", symbol)
+        print("Cannot get the quote for ", symbol, "Error Message" , identifier)
         return "NoQuote"
     
 

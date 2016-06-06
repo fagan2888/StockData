@@ -9,5 +9,4 @@ def RemoveNaN ( x ) :
     '''
     #x = x[numpy.logical_not(numpy.isnan(x))]
     x = x[~numpy.isnan(x)]
-    return x;
-    
+    return x;    

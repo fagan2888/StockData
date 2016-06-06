@@ -12,7 +12,7 @@ def InitExcel(filename):
 
 def CreateHTMLFile(filename):
     htmlfile = open(filename, "w")
-    htmlfile.writelines( """<html> <head> <title>Full Report based on today's data</title> </head> <body> <table border="1">""")
+    htmlfile.writelines( """<html> <head> <title>Full Report based on today's data</title> </head> <body> <table border="1">""")    
     htmlfile.close()
 
 def CloseHTMLFile(filename):

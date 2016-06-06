@@ -1,5 +1,9 @@
-2016/06/02	VWS.CO has the recommendation of 1.32769375599
-2016/06/02	SCHO.CO has the recommendation of 1.04328899917
-2016/06/02	SPKSJF.CO has the recommendation of 1.47805810857
-2016/06/02	BOCON-B.CO has the recommendation of 1.00333057453
-2016/06/02	AH.AS has the recommendation of 1.0059292581
+2016/06/06	RILBA.CO has the recommendation of 1.08333459037
+2016/06/06	SPKSJF.CO has the recommendation of 1.20094075689
+2016/06/06	KRE.CO has the recommendation of 1.01404857981
+2016/06/06	LOLB.CO has the recommendation of 1.3566922715
+2016/06/06	MNBA.CO has the recommendation of 1.26576261185
+2016/06/06	RTX.CO has the recommendation of 1.65018987516
+2016/06/06	STRINV.CO has the recommendation of 1.83906748952
+2016/06/06	AH.AS has the recommendation of 1.01442881993
+2016/06/06	DSM.AS has the recommendation of 1.58967923941

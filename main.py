@@ -8,6 +8,8 @@ Implement ADX and its trend check to recommendation, but not applied
 bull power and bear power is implemented, but not applied. 
 Implement the volumn detect
 
+e.g. RSI Do not calculation multiple time, Calculate once just use the last five element in the array?
+Check all the [-1] is correctly return the value. 
 Need condiser the back testing. 
 When to buy a stock. 
 When to sell a stock.

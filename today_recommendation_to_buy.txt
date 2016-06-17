@@ -1,8 +1,1 @@
-2016/06/08	RILBA.CO has the recommendation of 1.16636879122
-2016/06/08	ASGGRO.CO has the recommendation of 1.11904761905
-2016/06/08	ATLA-DKK.CO has the recommendation of 1.92290968948
-2016/06/08	NEUR.CO has the recommendation of 1.16445884653
-2016/06/08	RTX.CO has the recommendation of 1.45263432898
-2016/06/08	SCD.CO has the recommendation of 2.00663397678
-2016/06/08	DSM.AS has the recommendation of 1.37009486251
-2016/06/08	HEIA.AS has the recommendation of 1.11081329466
+2016/06/17	GES.CO has the recommendation of 1.23926029444

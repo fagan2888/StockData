@@ -66,10 +66,15 @@ for symbol in symbols:
     #adx_rec = reccalc.GetADXRecommendation(adx, adx_trend)
     #print(adx_rec)
     
-    di_m = ind_calc.Minus_DI(quote)
-    print(di_m)
-    di_p = ind_calc.Plus_DI(quote)
-    print(di_p)
+    #di_m = ind_calc.Minus_DI(quote)
+    #print(di_m)
+    #di_p = ind_calc.Plus_DI(quote)
+    #print(di_p)
+    print(quote)
+    
+    ind_calc.macd_dif(quote.Close)
+    
+    
     
     #macd_r, macd_pos, rsi, j, rec = CalculateRecommendation(quote)  # Today's recommendation
     

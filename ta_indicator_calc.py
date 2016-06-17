@@ -7,7 +7,13 @@ def rsi ( quote ):
     return rsi[-1];
     
 def macd ( quote ):
-    macddiv, macdsignal, macdhist = ta.MACD(numpy.array(quote), fastperiod=12, slowperiod=26, signalperiod=9)        
+    '''
+    http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_convergence_divergence_macd
+    MACD Line: (12-day EMA - 26-day EMA)
+    Signal Line: 9-day EMA of MACD Line
+    MACD Histogram: MACD Line - Signal Line
+    '''
+    macddiv, macdsignal, macdhist = ta.MACD(numpy.array(quote), fastperiod=12, slowperiod=26, signalperiod=9)            
     return macddiv, macdsignal, macdhist;
 
 def macd_dif ( quote ):
@@ -15,7 +21,6 @@ def macd_dif ( quote ):
         calculate the difference between MACD and MACD signal. also based on their value, give the judgement of bullish or bearish market        
     '''
     macddiv, macdsignal, macdhist = macd(quote)
-    diff = macddiv - macdsignal
     if (macddiv[-1] >0 and macdsignal[-1] >0):
         pos = 1
     elif (macddiv[-1] <0 and macdsignal[-1] <0):
@@ -24,7 +29,7 @@ def macd_dif ( quote ):
         pos = 0.5 * min(2, (macddiv[-1] - macdsignal[-1]))
     else:
         pos = 0        
-    return diff, pos;
+    return macdhist, pos;
     
 def J ( quote ):
     STOCH_K, STOCH_D = ta.STOCH(numpy.array(quote.High), numpy.array(quote.Low), numpy.array(quote.Close),slowk_period=14,slowd_period=3)

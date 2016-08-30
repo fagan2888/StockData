@@ -22,6 +22,7 @@ e.g. When recommendation > 1.5 buy stock at the high of next day.
 '''
 
 import ta_indicator_calc as ind_calc
+import recommendation as rec
 from recommendation import GetRecommendation
 import parameters as param
 
@@ -68,6 +69,50 @@ def CalculateRecommendation(*args):
     return macd_r, macd_pos, rsi_today, j, adxr, rec    
 
 
+def CalculateTrend(*args):
+    '''
+    Calculate the trend following the K.Lien instruction.
+    '''
+    quote = args[0]
+
+    if (len(args) == 2):
+        data_shift = args[1]
+    else:
+        data_shift = 0
+    #rec = 0 
+    #macd_r = 0
+    #macd_pos = 0
+    #rsi_today = 0
+    #j = 0    
+    #adx = 0
+    #adx_trend = 0
+    #adx_r = 0
+    #adxr = 0
+    sma50 = 0
+
+    if not(isinstance(quote, str)):      
+        sma20 = ind_calc.SMA(quote, 20)   
+        sma50 = ind_calc.SMA(quote, 50)
+        sma100 = ind_calc.SMA(quote, 100)
+        bollinger = ind_calc.Bollinger(quote)[0]
+        if len(ind_calc.ADXR(quote)) > 1:
+            adxr = ind_calc.ADXR(quote)[-1]
+        quote_lastday = quote.iloc[-1]        
+        if not(isinstance(quote_lastday, str)):
+            issma20 = rec.isCrossSMA50(quote.Close, sma20)
+            issma50 = rec.isCrossSMA50(quote.Close, sma50)
+            issma100 = rec.isCrossSMA50(quote.Close, sma100)
+            isbollinger = rec.isCrossBollinger(quote.Close, bollinger)
+        else:
+            print("No last day quote, no recommendation.")                                                      
+    else:
+        print("No Quote for ", symbol)
+    
+    return issma20, issma50, issma100, isbollinger    
+
+
+
+
 #Create a blank file
 from recommendation import CleanRecommendation
 CleanRecommendation(param.BUYLIST)
@@ -76,10 +121,10 @@ CleanRecommendation(param.SELLLIST)
 
 # Get the symbols from the text files.
 from stock import GetStockSymbol
-symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS)
+#symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS)
 porto_symbols = GetStockSymbol(param.MYPF)
 #symbols = ['DII.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO','PAAL-B'] 
-#symbols = ['NOVO-B.CO']
+symbols = ['NOVO-B.CO']
 
 from stock import GetStockQuote
 from recommendation import WriteRecommendation
@@ -93,6 +138,7 @@ for symbol in symbols:
     print(symbol)        
     # Get the stock quote
     quote = GetStockQuote(symbol, param.QUOTE_LENGTH, 0)
+    CalculateTrend(quote)
     if (len(quote) > param.QUOTE_LENGTH * 0.5):  #if not enough valid quote, do not calculate.
         quote.index =quote.index.map(lambda t: t.strftime('%Y-%m-%d'))
         line = ['', '', quote.index[len(quote)-1], quote.index[len(quote)-2],quote.index[len(quote)-3], quote.index[len(quote)-4], quote.index[len(quote)-5]]         

@@ -77,6 +77,7 @@ def BullBearPower(quote):
     low =  numpy.array(quote.Low)[-(len(ema13)+1) :-1]   
     
     bullpower = high - ema13
+    
     bearpower = low - ema13
     
     print(bullpower)
@@ -102,4 +103,17 @@ def Plus_DI (quote) :
     
     return plus_di 
     
-        
+
+def SMA (quote, peroid) :
+    '''
+    Calculate The SMA
+    '''         
+
+    sma = ta.SMA(numpy.array(quote.Close), peroid)
+    return sma
+
+def Bollinger (quote) :
+    '''calculate Bollinger 1'''     
+    bollinger = ta.BBANDS(numpy.array(quote.Close),5,1,1,0)
+    return bollinger
+

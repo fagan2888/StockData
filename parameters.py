@@ -1,4 +1,4 @@
-QUOTE_LENGTH = 120
+QUOTE_LENGTH = 180
 
 rsi_upper = 80
 rsi_lower = 20

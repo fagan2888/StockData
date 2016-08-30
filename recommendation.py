@@ -264,6 +264,19 @@ def Strategy_indicator_times_confidence( *args):
     recommendation = indicator * confidence 
     return recommendation
     
-def Strategy_Ongoing(*args):
-    
+def Strategy_Ongoing(*args):    
     return 0
+
+def isCrossSMA50( quote , sma50 ) :
+    return isCross(quote, sma50)
+
+def isCrossBollinger(quote, bollinger) :
+    return isCross(quote, bollinger)
+
+def isCross(quote, line) :
+    if(numpy.array(quote)[-1] > line[-1] and numpy.array(quote)[-2] <= line[-2]):
+        return True
+    else:
+        return False
+        
+        

@@ -69,6 +69,7 @@ macddiv, macdsignal, macdhist = ta.MACD(numpy.array(aapl.Close), fastperiod=12, 
 
 cross = macdsignal - macddiv
 
+bollinger = 
 
 
 

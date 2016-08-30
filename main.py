@@ -88,7 +88,11 @@ def CalculateTrend(*args):
     #adx_trend = 0
     #adx_r = 0
     #adxr = 0
-    sma50 = 0
+    issma20 = False
+    issma50 = False
+    issma100 = False
+    isbollinger = False
+    isadxr = False
 
     if not(isinstance(quote, str)):      
         sma20 = ind_calc.SMA(quote, 20)   
@@ -99,6 +103,8 @@ def CalculateTrend(*args):
             adxr = ind_calc.ADXR(quote)[-1]
         quote_lastday = quote.iloc[-1]        
         if not(isinstance(quote_lastday, str)):
+            if (adxr > 25):
+                isadxr = True
             issma20 = rec.isCrossSMA50(quote.Close, sma20)
             issma50 = rec.isCrossSMA50(quote.Close, sma50)
             issma100 = rec.isCrossSMA50(quote.Close, sma100)
@@ -108,7 +114,7 @@ def CalculateTrend(*args):
     else:
         print("No Quote for ", symbol)
     
-    return issma20, issma50, issma100, isbollinger    
+    return isadxr,issma20, issma50, issma100, isbollinger    
 
 
 
@@ -123,8 +129,8 @@ CleanRecommendation(param.SELLLIST)
 from stock import GetStockSymbol
 #symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS)
 porto_symbols = GetStockSymbol(param.MYPF)
-#symbols = ['DII.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO','PAAL-B'] 
-symbols = ['NOVO-B.CO']
+symbols = ['DII.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO','PAAL-B'] 
+#symbols = ['NOVO-B.CO']
 
 from stock import GetStockQuote
 from recommendation import WriteRecommendation

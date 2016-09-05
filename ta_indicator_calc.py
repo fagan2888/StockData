@@ -114,6 +114,6 @@ def SMA (quote, peroid) :
 
 def Bollinger (quote) :
     '''calculate Bollinger 1'''     
-    bollinger = ta.BBANDS(numpy.array(quote.Close),5,1,1,0)
+    bollinger = ta.BBANDS(numpy.array(quote.Close),20,1,1,0)
     return bollinger
 

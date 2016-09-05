@@ -159,6 +159,31 @@ def GetCellColorCode(*args):
         bgcolor = """BGCOLOR=#FFFFFF """
     return bgcolor
 
+def AddLineToHTMLTable2(*args):
+    filename = args[0]
+    line = args[1]
+    type = line[1]
+    htmlfile = open(filename, "a")    
+    htmlfile.writelines("""<tr>""")
+    for item in line:
+        htmlfile.writelines("""<td """)
+        #Get the color code
+        if not(isinstance(item, str)):  # skip string items like Symbol
+            htmlfile.writelines(GetCellColorCode(type,item))
+        if  type == param.RECOMMENDATION_TYPE:
+            htmlfile.writelines("""><b>""")
+        else:
+            htmlfile.writelines(""">""")        
+        htmlfile.writelines(str(item))
+        if type == param.RECOMMENDATION_TYPE:
+            htmlfile.writelines("""</b></td>""")
+        else:
+            htmlfile.writelines("""</td>""")
+        
+    htmlfile.writelines("""</tr>""")
+    htmlfile.close()
+
+
     
 def WriteResultToText(filename, result):
     symbol = result[0]
@@ -174,4 +199,5 @@ def WriteResultToText(filename, result):
         line =  symbol + "\t" + str(item) + "\n"
         file.writelines(line)
     file.close()
-    
+
+

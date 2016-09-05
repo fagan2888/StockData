@@ -35,7 +35,7 @@ MYPF = "portfolio.txt"
 BUYLIST = "today_recommendation_to_buy.txt"
 SELLLIST = "today_recommendation_to_sell.txt"
 
-
+HTML_TREND_REPORT_FILENAME = "TrendReport.html"
 HTML_REPORT_FILENAME = "FullReport.html"
 HTML_PORTOFOLIO_REPORT_FULLNAME = "PortfolioReport.html"
 FTP_INFO_FILE = "ftpinfo.yaml"

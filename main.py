@@ -22,7 +22,7 @@ e.g. When recommendation > 1.5 buy stock at the high of next day.
 '''
 
 import ta_indicator_calc as ind_calc
-import recommendation as rec
+import recommendation as rec_calc
 from recommendation import GetRecommendation
 import parameters as param
 
@@ -79,15 +79,7 @@ def CalculateTrend(*args):
         data_shift = args[1]
     else:
         data_shift = 0
-    #rec = 0 
-    #macd_r = 0
-    #macd_pos = 0
-    #rsi_today = 0
-    #j = 0    
-    #adx = 0
-    #adx_trend = 0
-    #adx_r = 0
-    #adxr = 0
+
     issma20 = False
     issma50 = False
     issma100 = False
@@ -105,10 +97,15 @@ def CalculateTrend(*args):
         if not(isinstance(quote_lastday, str)):
             if (adxr > 25):
                 isadxr = True
-            issma20 = rec.isCrossSMA50(quote.Close, sma20)
-            issma50 = rec.isCrossSMA50(quote.Close, sma50)
-            issma100 = rec.isCrossSMA50(quote.Close, sma100)
-            isbollinger = rec.isCrossBollinger(quote.Close, bollinger)
+            print("Last close are " , quote.Close[-1] , " & " , quote.Close[-2])
+            issma20 = rec_calc.isCross(quote.Close, sma20)
+            print("Last sma20 are " , sma20[-1] , " & " , sma20[-2])
+            issma50 = rec_calc.isCross(quote.Close, sma50)
+            print("Last sma50 are " , sma50[-1] , " & " , sma50[-2])
+            issma100 = rec_calc.isCross(quote.Close, sma100)
+            print("Last sma100 are " , sma100[-1] , " & " , sma100[-2])
+            isbollinger = rec_calc.isCrossBollinger(quote.Close, bollinger)
+            print("Last Bollinger are " , bollinger[-1] , " & " , bollinger[-2])
         else:
             print("No last day quote, no recommendation.")                                                      
     else:
@@ -127,9 +124,9 @@ CleanRecommendation(param.SELLLIST)
 
 # Get the symbols from the text files.
 from stock import GetStockSymbol
-#symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS)
+symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS)
 porto_symbols = GetStockSymbol(param.MYPF)
-symbols = ['DII.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO','PAAL-B'] 
+#symbols = ['DII.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO','PAAL-B'] 
 #symbols = ['NOVO-B.CO']
 
 from stock import GetStockQuote
@@ -139,12 +136,14 @@ import ReportManager as rm
 
 rm.CreateHTMLFile(param.HTML_REPORT_FILENAME)   #Create the header part of HTML report
 rm.CreateHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
+rm.CreateHTMLFile(param.HTML_TREND_REPORT_FILENAME)
+line = ["","Last Cloase","Counter", "ADXR > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "ADXR", "RSI"]
+rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)
 
 for symbol in symbols:    
     print(symbol)        
     # Get the stock quote
     quote = GetStockQuote(symbol, param.QUOTE_LENGTH, 0)
-    CalculateTrend(quote)
     if (len(quote) > param.QUOTE_LENGTH * 0.5):  #if not enough valid quote, do not calculate.
         quote.index =quote.index.map(lambda t: t.strftime('%Y-%m-%d'))
         line = ['', '', quote.index[len(quote)-1], quote.index[len(quote)-2],quote.index[len(quote)-3], quote.index[len(quote)-4], quote.index[len(quote)-5]]         
@@ -191,6 +190,18 @@ for symbol in symbols:
         rm.AddLineToHTMLTable(param.HTML_REPORT_FILENAME, line)    
         if symbol in porto_symbols:
             rm.AddLineToHTMLTable(param.HTML_PORTOFOLIO_REPORT_FULLNAME, line)        
+        
+        
+        counter = 0
+        isadxr,issma20, issma50, issma100, isbollinger = CalculateTrend(quote)
+        for _ in [isadxr,issma20, issma50, issma100, isbollinger]:
+            if(_):
+                counter = counter + 1
+        line = [symbol, quote.Close[-1], counter, isadxr, issma20, issma50, issma100, isbollinger, adxr,rsi]
+        rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)        
+        print("The end")
+
+
     else:
         print(symbol, " does not have enough valid quotes to calculation the recommendation")
         

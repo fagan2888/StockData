@@ -19,6 +19,7 @@ def UploadFileToFTP ():
         session.cwd(ftpinfo['dir'])
         UploadFile(param.HTML_REPORT_FILENAME, session)
         UploadFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME, session)
+        UploadFile(param.HTML_TREND_REPORT_FILENAME, session)
         UploadFile(param.BUYLIST, session)
         UploadFile(param.SELLLIST,session)        
         session.quit()

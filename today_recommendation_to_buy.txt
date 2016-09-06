@@ -1,5 +1,12 @@
-2016/09/05	TRYG.CO has the recommendation of 1.00871493997
-2016/09/05	RILBA.CO has the recommendation of 1.02091213407
-2016/09/05	AOJ-P.CO has the recommendation of 1.11383453653
-2016/09/05	TPSL.CO has the recommendation of 1.07785445203
-2016/09/05	PHIA.AS has the recommendation of 1.46685781368
+2016/09/06	DANSKE.CO has the recommendation of 1.23634409728
+2016/09/06	MAERSK-A.CO has the recommendation of 1.21496427348
+2016/09/06	MAERSK-B.CO has the recommendation of 1.24403307881
+2016/09/06	AMBU-B.CO has the recommendation of 1.11850040183
+2016/09/06	RILBA.CO has the recommendation of 1.03813429767
+2016/09/06	SCHO.CO has the recommendation of 1.26141181388
+2016/09/06	CHEMM.CO has the recommendation of 1.50284655611
+2016/09/06	NOBIN.CO has the recommendation of 1.05832829705
+2016/09/06	ROV.CO has the recommendation of 1.84110256957
+2016/09/06	TPSL.CO has the recommendation of 1.07858286492
+2016/09/06	PHIA.AS has the recommendation of 1.47804095434
+2016/09/06	UNA.AS has the recommendation of 1.26655300919

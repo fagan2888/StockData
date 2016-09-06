@@ -12,7 +12,7 @@
 2016/09/06	DLH.CO has the recommendation of -2.09023539016
 2016/09/06	GABR.CO has the recommendation of -1.19077836031
 2016/09/06	NORTHM.CO has the recommendation of -1.28732904948
-2016/09/06	PARKEN.CO has the recommendation of -1.71379560514
+2016/09/06	PARKEN.CO has the recommendation of -1.71670911811
 2016/09/06	RBLN-B.CO has the recommendation of -3.09613184927
 2016/09/06	SIF.CO has the recommendation of -1.80982611865
 2016/09/06	SPG.CO has the recommendation of -1.79916222904

@@ -90,7 +90,8 @@ def CalculateTrend(*args):
         sma20 = ind_calc.SMA(quote, 20)   
         sma50 = ind_calc.SMA(quote, 50)
         sma100 = ind_calc.SMA(quote, 100)
-        bollinger = ind_calc.Bollinger(quote)[0]
+        bollinger = ind_calc.Bollinger(quote,1)[0]
+        bollinger2 = ind_calc.Bollinger(quote,2)[0]
         if len(ind_calc.ADXR(quote)) > 1:
             adxr = ind_calc.ADXR(quote)[-1]
         quote_lastday = quote.iloc[-1]        
@@ -106,12 +107,18 @@ def CalculateTrend(*args):
             print("Last sma100 are " , sma100[-1] , " & " , sma100[-2])
             isbollinger = rec_calc.isCrossBollinger(quote.Close, bollinger)
             print("Last Bollinger are " , bollinger[-1] , " & " , bollinger[-2])
+
+            isAboveSMA20 = quote.Close[-1] > sma20[-1]
+            isAboveSMA50 = quote.Close[-1] > sma50[-1]
+            isAboveSMA100 = quote.Close[-1] > sma100[-1]
+            isAboveBollinger1 = quote.Close[-1] > bollinger[-1]
+            isBelowBollinger2 = quote.Close[-1] <= bollinger2[-1]
         else:
             print("No last day quote, no recommendation.")                                                      
     else:
         print("No Quote for ", symbol)
     
-    return isadxr,issma20, issma50, issma100, isbollinger    
+    return isadxr,issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2    
 
 
 
@@ -137,7 +144,7 @@ import ReportManager as rm
 rm.CreateHTMLFile(param.HTML_REPORT_FILENAME)   #Create the header part of HTML report
 rm.CreateHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
 rm.CreateHTMLFile(param.HTML_TREND_REPORT_FILENAME)
-line = ["","Last Cloase","Counter", "ADXR > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "ADXR", "RSI"]
+line = ["Symbol","Last Close","Recommendation", "ADXR > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Below Bollinger 2" ,"ADXR", "RSI"]
 rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)
 
 for symbol in symbols:    
@@ -193,11 +200,11 @@ for symbol in symbols:
         
         
         counter = 0
-        isadxr,issma20, issma50, issma100, isbollinger = CalculateTrend(quote)
+        isadxr,issma20, issma50, issma100, isbollinger,isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2 = CalculateTrend(quote)
         for _ in [isadxr,issma20, issma50, issma100, isbollinger]:
             if(_):
                 counter = counter + 1
-        line = [symbol, quote.Close[-1], counter, isadxr, issma20, issma50, issma100, isbollinger, adxr,rsi]
+        line = [symbol, quote.Close[-1], counter, isadxr, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2,adxr,rsi]
         rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)        
         print("The end")
 

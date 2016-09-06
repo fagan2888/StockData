@@ -4,9 +4,9 @@
 2016/09/06	AMBU-B.CO has the recommendation of 1.11850040183
 2016/09/06	RILBA.CO has the recommendation of 1.03813429767
 2016/09/06	SCHO.CO has the recommendation of 1.26141181388
-2016/09/06	CHEMM.CO has the recommendation of 1.50284655611
-2016/09/06	NOBIN.CO has the recommendation of 1.05832829705
-2016/09/06	ROV.CO has the recommendation of 1.84110256957
+2016/09/06	CHEMM.CO has the recommendation of 1.43903693019
+2016/09/06	NOBIN.CO has the recommendation of 1.09317989152
+2016/09/06	ROV.CO has the recommendation of 1.90442827443
 2016/09/06	TPSL.CO has the recommendation of 1.07858286492
 2016/09/06	PHIA.AS has the recommendation of 1.47804095434
 2016/09/06	UNA.AS has the recommendation of 1.26655300919

@@ -168,12 +168,11 @@ def AddLineToHTMLTable2(*args):
     '''
     filename = args[0]
     line = args[1]
-    #type = line[1]
     rec = line[2]
     htmlfile = open(filename, "a")    
     htmlfile.writelines("""<tr>""")
 
-    for i in range(0, len(line)-1):
+    for i in range(0, len(line)):
         htmlfile.writelines("""<td """)
         if i == 2:
             if (line[i] == 2) :

@@ -10,9 +10,14 @@ def InitExcel(filename):
     worksheet.write(0, 3, "J" )
     worksheet.write(0, 4, "Candle" )    
 
-def CreateHTMLFile(filename):
+#def CreateHTMLFile(filename, header=None):
+#    htmlfile = open(filename, "w")
+#    htmlfile.writelines( """<html> <head> <title>Full Report based on today's data</title> </head> <body> <table border="1">""")    
+#    htmlfile.close()
+
+def CreateHTMLFile(filename, header = "Full Report based on today's data"):
     htmlfile = open(filename, "w")
-    htmlfile.writelines( """<html> <head> <title>Full Report based on today's data</title> </head> <body> <table border="1">""")    
+    htmlfile.writelines( """<html> <head> <title> """ + header + """ </title> </head> <body> <table border="1">""")    
     htmlfile.close()
 
 def CloseHTMLFile(filename):

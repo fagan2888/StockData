@@ -13,9 +13,9 @@
 2016/09/07	LOLB.CO has the recommendation of -2.70477764541
 2016/09/07	NORTHM.CO has the recommendation of -1.6022222405
 2016/09/07	PARKEN.CO has the recommendation of -1.49085769329
-2016/09/07	SALB.CO has the recommendation of -2.4138661739
+2016/09/07	SALB.CO has the recommendation of -2.49620515151
 2016/09/07	SIF.CO has the recommendation of -1.9826963751
 2016/09/07	SPEAS.CO has the recommendation of -1.15377728966
 2016/09/07	SPG.CO has the recommendation of -2.01891054542
-2016/09/07	STRINV.CO has the recommendation of -1.76707479954
+2016/09/07	STRINV.CO has the recommendation of -1.76987602834
 2016/09/07	SBMO.AS has the recommendation of -2.70095701522

@@ -112,16 +112,13 @@ def CalculateTrend(*args):
             isAboveSMA50 = quote.Close[-1] > sma50[-1]
             isAboveSMA100 = quote.Close[-1] > sma100[-1]
             isAboveBollinger1 = quote.Close[-1] > bollinger[-1]
-            isBelowBollinger2 = quote.Close[-1] <= bollinger2[-1]
+            isBelowBollinger2 = quote.Close[-1] <= bollinger2[-1] and quote.Close[-1] >= bollinger[-1]
         else:
             print("No last day quote, no recommendation.")                                                      
     else:
         print("No Quote for ", symbol)
     
     return isadxr,issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2    
-
-
-
 
 #Create a blank file
 from recommendation import CleanRecommendation
@@ -143,8 +140,8 @@ import ReportManager as rm
 
 rm.CreateHTMLFile(param.HTML_REPORT_FILENAME)   #Create the header part of HTML report
 rm.CreateHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
-rm.CreateHTMLFile(param.HTML_TREND_REPORT_FILENAME)
-line = ["Symbol","Last Close","Recommendation", "ADXR > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Below Bollinger 2" ,"ADXR", "RSI"]
+rm.CreateHTMLFile(param.HTML_TREND_REPORT_FILENAME, "Trend Report")
+line = ["Symbol","Last Close","Recommendation", "ADXR > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2" ,"ADXR", "RSI"]
 rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)
 
 for symbol in symbols:    

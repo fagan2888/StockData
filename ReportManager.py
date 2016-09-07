@@ -21,6 +21,9 @@ def CloseHTMLFile(filename):
     htmlfile.close()
 
 def AddLineToHTMLTable(*args):
+    '''
+    Used by FullReport.html
+    '''
     filename = args[0]
     line = args[1]
     type = line[1]
@@ -160,25 +163,29 @@ def GetCellColorCode(*args):
     return bgcolor
 
 def AddLineToHTMLTable2(*args):
+    '''
+    For TrendReport.html
+    '''
     filename = args[0]
     line = args[1]
-    type = line[1]
+    #type = line[1]
+    rec = line[2]
     htmlfile = open(filename, "a")    
     htmlfile.writelines("""<tr>""")
-    for item in line:
+
+    for i in range(0, len(line)-1):
         htmlfile.writelines("""<td """)
-        #Get the color code
-        if not(isinstance(item, str)):  # skip string items like Symbol
-            htmlfile.writelines(GetCellColorCode(type,item))
-        if  type == param.RECOMMENDATION_TYPE:
-            htmlfile.writelines("""><b>""")
-        else:
-            htmlfile.writelines(""">""")        
-        htmlfile.writelines(str(item))
-        if type == param.RECOMMENDATION_TYPE:
-            htmlfile.writelines("""</b></td>""")
-        else:
-            htmlfile.writelines("""</td>""")
+        if i == 2:
+            if (line[i] == 2) :
+                htmlfile.writelines(param.COLORCODE_REC_BUY)                    
+            elif (line[i] >= 3):
+                htmlfile.writelines(param.COLORCODE_REC_STRONGBUY)            
+        elif i >= 3 and i <=12:            
+            if(line[i]) :
+                htmlfile.writelines(param.COLORCODE_GOODSIGN)
+        htmlfile.writelines(""">""")    
+        htmlfile.writelines(str(line[i]))
+        htmlfile.writelines("""</td>""") 
         
     htmlfile.writelines("""</tr>""")
     htmlfile.close()

@@ -133,7 +133,7 @@ CleanRecommendation(param.SELLLIST)
 from stock import GetStockSymbol
 symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS)
 porto_symbols = GetStockSymbol(param.MYPF)
-#symbols = ['DII.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO','PAAL-B'] 
+#symbols = ['SALB.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO','PAAL-B'] 
 #symbols = ['NOVO-B.CO']
 
 from stock import GetStockQuote
@@ -205,7 +205,7 @@ for symbol in symbols:
             if(_):
                 counter = counter + 1
         line = [symbol, quote.Close[-1], counter, isadxr, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2,adxr,rsi]
-        rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)        
+        rm.AddLineToHTMLTable2(param.HTML_TREND_REPORT_FILENAME, line)        
         print("The end")
 
 

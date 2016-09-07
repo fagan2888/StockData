@@ -184,9 +184,24 @@ def AddLineToHTMLTable2(*args):
                 htmlfile.writelines(param.COLORCODE_REC_BUY)                    
             elif (line[i] >= 3):
                 htmlfile.writelines(param.COLORCODE_REC_STRONGBUY)            
-        elif i >= 3 and i <=12:            
+        elif i >= 3 and i <=7:            
+            if(line[i]) :
+                htmlfile.writelines(param.COLORCODE_OUTSTANDINGSIGN)
+        elif i >= 8 and i <=12:            
             if(line[i]) :
                 htmlfile.writelines(param.COLORCODE_GOODSIGN)
+        elif i == 13:
+            if(line[i]>=1.2):
+                htmlfile.writelines(param.COLORCODE_GOODSIGN)
+        elif i == 14:
+            if(line[i]>=25):
+                htmlfile.writelines(param.COLORCODE_GOODSIGN)
+        elif i == 15:
+            if(line[i]<=70):
+                htmlfile.writelines(param.COLORCODE_GOODSIGN)
+        elif i == 16:
+            if(line[i]<=80):
+                htmlfile.writelines(param.COLORCODE_GOODSIGN)                                
         htmlfile.writelines(""">""")    
         htmlfile.writelines(str(line[i]))
         htmlfile.writelines("""</td>""") 

@@ -3,6 +3,7 @@
 2016/09/07	SCHO.CO has the recommendation of 1.2855544754
 2016/09/07	CHEMM.CO has the recommendation of 1.34653249258
 2016/09/07	FED.CO has the recommendation of 1.48212470766
-2016/09/07	ROV.CO has the recommendation of 1.68646002511
+2016/09/07	NOBIN.CO has the recommendation of 1.00429941564
+2016/09/07	ROV.CO has the recommendation of 1.74355061203
 2016/09/07	TPSL.CO has the recommendation of 1.08003563888
 2016/09/07	UNA.AS has the recommendation of 1.27527562432

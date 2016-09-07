@@ -141,7 +141,7 @@ import ReportManager as rm
 rm.CreateHTMLFile(param.HTML_REPORT_FILENAME)   #Create the header part of HTML report
 rm.CreateHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
 rm.CreateHTMLFile(param.HTML_TREND_REPORT_FILENAME, "Trend Report")
-line = ["Symbol","Last Close","Recommendation", "ADXR > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2" ,"ADXR", "RSI"]
+line = ["Symbol","Last Close","Recommendation", "ADXR > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2", "MACD Diff" ,"ADXR", "RSI", "J"]
 rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)
 
 for symbol in symbols:    
@@ -201,10 +201,8 @@ for symbol in symbols:
         for _ in [isadxr,issma20, issma50, issma100, isbollinger]:
             if(_):
                 counter = counter + 1
-        line = [symbol, quote.Close[-1], counter, isadxr, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2,adxr,rsi]
+        line = [symbol, quote.Close[-1], counter, isadxr, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2, macd_r, adxr,rsi,j]
         rm.AddLineToHTMLTable2(param.HTML_TREND_REPORT_FILENAME, line)        
-        print("The end")
-
 
     else:
         print(symbol, " does not have enough valid quotes to calculation the recommendation")

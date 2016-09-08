@@ -84,7 +84,7 @@ def CalculateTrend(*args):
     issma50 = False
     issma100 = False
     isbollinger = False
-    isadxr = False
+    isadx = False
 
     if not(isinstance(quote, str)):      
         sma20 = ind_calc.SMA(quote, 20)   
@@ -94,10 +94,12 @@ def CalculateTrend(*args):
         bollinger2 = ind_calc.Bollinger(quote,2)[0]
         if len(ind_calc.ADXR(quote)) > 1:
             adxr = ind_calc.ADXR(quote)[-1]
+        if len(ind_calc.ADX(quote)) > 1:
+            adx = ind_calc.ADXR(quote)[-1]
         quote_lastday = quote.iloc[-1]        
         if not(isinstance(quote_lastday, str)):
-            if (adxr > 25):
-                isadxr = True
+            if (adx > 25):
+                isadx = True
             print("Last close are " , quote.Close[-1] , " & " , quote.Close[-2])
             issma20 = rec_calc.isCross(quote.Close, sma20)
             print("Last sma20 are " , sma20[-1] , " & " , sma20[-2])
@@ -118,7 +120,7 @@ def CalculateTrend(*args):
     else:
         print("No Quote for ", symbol)
     
-    return isadxr,issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2    
+    return isadx,issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2    
 
 #Create a blank file
 from recommendation import CleanRecommendation
@@ -141,7 +143,7 @@ import ReportManager as rm
 rm.CreateHTMLFile(param.HTML_REPORT_FILENAME)   #Create the header part of HTML report
 rm.CreateHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
 rm.CreateHTMLFile(param.HTML_TREND_REPORT_FILENAME, "Trend Report")
-line = ["Symbol","Last Close","Recommendation", "ADXR > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2", "MACD Diff" ,"ADXR", "RSI", "J"]
+line = ["Symbol","Last Close","Recommendation", "ADX > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2", "MACD Diff" ,"ADXR", "RSI", "J"]
 rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)
 
 for symbol in symbols:    
@@ -196,11 +198,11 @@ for symbol in symbols:
         
         
         counter = 0
-        isadxr,issma20, issma50, issma100, isbollinger,isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2 = CalculateTrend(quote)
-        for _ in [isadxr,issma20, issma50, issma100, isbollinger]:
+        isadx,issma20, issma50, issma100, isbollinger,isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2 = CalculateTrend(quote)
+        for _ in [isadx,issma20, issma50, issma100, isbollinger]:
             if(_):
                 counter = counter + 1
-        line = [symbol, quote.Close[-1], counter, isadxr, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2, macd_r, adxr,rsi,j]
+        line = [symbol, quote.Close[-1], counter, isadx, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2, macd_r, adxr,rsi,j]
         rm.AddLineToHTMLTable2(param.HTML_TREND_REPORT_FILENAME, line)        
 
     else:

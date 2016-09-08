@@ -1,0 +1,4 @@
+EUR
+JPY
+GBP
+AUD

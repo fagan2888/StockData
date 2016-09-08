@@ -31,6 +31,9 @@ STOCKLIST_STO = "stocklist_sto.txt"
 STOEXCHANGE = ".ST"
 STOCKLIST_AMS = "stocklist_as.txt"
 MYPF = "portfolio.txt"
+STOCKLIST_FX = "forex.txt"
+FXEXCHANGE = "=X"
+
 
 BUYLIST = "today_recommendation_to_buy.txt"
 SELLLIST = "today_recommendation_to_sell.txt"

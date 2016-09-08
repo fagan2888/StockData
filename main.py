@@ -128,11 +128,11 @@ CleanRecommendation(param.SELLLIST)
 
 # Get the symbols from the text files.
 from stock import GetStockSymbol
-symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS)
+symbols = GetStockSymbol(param.STOCKLIST_CPH, param.CPHEXCHANGE) +  GetStockSymbol(param.STOCKLIST_AMS) + GetStockSymbol(param.STOCKLIST_FX, param.FXEXCHANGE)
 porto_symbols = GetStockSymbol(param.MYPF)
 #symbols = ['SALB.CO', 'GEN.CO', 'SIM.CO', 'NOVO-B.CO','PAAL-B'] 
 #symbols = ['NOVO-B.CO']
-
+#symbols = ['EUR=X', 'JPY=X']
 from stock import GetStockQuote
 from recommendation import WriteRecommendation
 import ReportManager as rm
@@ -145,8 +145,7 @@ line = ["Symbol","Last Close","Recommendation", "ADXR > 25", "Cross SMA20", "Cro
 rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)
 
 for symbol in symbols:    
-    print(symbol)        
-    # Get the stock quote
+    print(symbol)            
     quote = GetStockQuote(symbol, param.QUOTE_LENGTH, 0)
     if (len(quote) > param.QUOTE_LENGTH * 0.5):  #if not enough valid quote, do not calculate.
         quote.index =quote.index.map(lambda t: t.strftime('%Y-%m-%d'))

@@ -1,9 +1,4 @@
-2016/09/08	TDC.CO has the recommendation of 1.70793261218
-2016/09/08	ALMB.CO has the recommendation of 1.23514886159
-2016/09/08	CHEMM.CO has the recommendation of 1.19814588664
-2016/09/08	FED.CO has the recommendation of 1.46233866682
-2016/09/08	FYNBK.CO has the recommendation of 1.19873092763
-2016/09/08	ROV.CO has the recommendation of 1.50063627759
-2016/09/08	TPSL.CO has the recommendation of 1.08170041864
-2016/09/08	NN.AS has the recommendation of 1.42836373893
-2016/09/08	WKL.AS has the recommendation of 1.10522363832
+2016/09/13	ONXEO.CO has the recommendation of 1.25611634763
+2016/09/13	COLUM.CO has the recommendation of 1.12045844033
+2016/09/13	TOTA.CO has the recommendation of 1.4252817726
+2016/09/13	TPSL.CO has the recommendation of 1.08430336162

@@ -25,6 +25,7 @@ import ta_indicator_calc as ind_calc
 import recommendation as rec_calc
 from recommendation import GetRecommendation
 import parameters as param
+import time
 
 def CalculateRecommendation(*args):
     '''
@@ -139,11 +140,13 @@ from stock import GetStockQuote
 from recommendation import WriteRecommendation
 import ReportManager as rm
 
+## dd/mm/yyyy format
+today = time.strftime("%d/%m/%Y")
 
 rm.CreateHTMLFile(param.HTML_REPORT_FILENAME)   #Create the header part of HTML report
 rm.CreateHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
 rm.CreateHTMLFile(param.HTML_TREND_REPORT_FILENAME, "Trend Report")
-line = ["Symbol","Last Close","Recommendation", "ADX > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2", "MACD Diff" ,"ADXR", "RSI", "J"]
+line = ["Symbol ",  today +" Close","Recommendation", "ADX > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2", "MACD Diff" ,"ADXR", "RSI", "J"]
 rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)
 
 for symbol in symbols:    

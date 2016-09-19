@@ -205,7 +205,7 @@ for symbol in symbols:
         for _ in [isadx,issma20, issma50, issma100, isbollinger]:
             if(_):
                 counter = counter + 1
-        line = [symbol, quote.Close[-1], quote.High[-1], quote.Low[-1], max(quote.High[len(quote.High)-10:-1]), min(quote.Low[len(quote.Low)-10:-1]),counter, isadx, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2, macd_r, adxr,rsi,j]
+        line = [symbol, quote.Close[-1], quote.High[-1], quote.Low[-1], max(quote.High[len(quote.High)-10:len(quote.High)]), min(quote.Low[len(quote.Low)-10:len(quote.High)]),counter, isadx, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2, macd_r, adxr,rsi,j]
         rm.AddLineToHTMLTable2(param.HTML_TREND_REPORT_FILENAME, line)        
 
     else:

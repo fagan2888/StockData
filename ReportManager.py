@@ -179,27 +179,40 @@ def AddLineToHTMLTable2(*args):
 
     for i in range(0, len(line)):
         htmlfile.writelines("""<td """)
+
         if i == 2:
+            if line[i] == line[1]:
+                htmlfile.writelines(param.COLORCODE_REC_BUY)
+        if i == 3:
+            if line[i] == line[1]:
+                htmlfile.writelines(param.COLORCODE_REC_MAYSELL)        
+        if i == 4:
+            if(line[i] == line[2]):
+                htmlfile.writelines(param.COLORCODE_REC_BUY)
+        elif i == 5:
+            if(line[i] == line[3]):
+                htmlfile.writelines(param.COLORCODE_REC_SELL)        
+        elif i == 6:
             if (line[i] == 2) :
                 htmlfile.writelines(param.COLORCODE_REC_BUY)                    
             elif (line[i] >= 3):
                 htmlfile.writelines(param.COLORCODE_REC_STRONGBUY)            
-        elif i >= 3 and i <=7:            
+        elif i >= 7 and i <=11:            
             if(line[i]) :
                 htmlfile.writelines(param.COLORCODE_OUTSTANDINGSIGN)
-        elif i >= 8 and i <=12:            
+        elif i >= 12 and i <=16:            
             if(line[i]) :
                 htmlfile.writelines(param.COLORCODE_GOODSIGN)
-        elif i == 13:
+        elif i == 17:
             if(line[i]>=1.2):
                 htmlfile.writelines(param.COLORCODE_GOODSIGN)
-        elif i == 14:
+        elif i == 18:
             if(line[i]>=25):
                 htmlfile.writelines(param.COLORCODE_GOODSIGN)
-        elif i == 15:
+        elif i == 19:
             if(line[i]<=70):
                 htmlfile.writelines(param.COLORCODE_GOODSIGN)
-        elif i == 16:
+        elif i == 20:
             if(line[i]<=80):
                 htmlfile.writelines(param.COLORCODE_GOODSIGN)                                
         htmlfile.writelines(""">""")    

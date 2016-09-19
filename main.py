@@ -146,7 +146,7 @@ today = time.strftime("%d/%m/%Y")
 rm.CreateHTMLFile(param.HTML_REPORT_FILENAME)   #Create the header part of HTML report
 rm.CreateHTMLFile(param.HTML_PORTOFOLIO_REPORT_FULLNAME)
 rm.CreateHTMLFile(param.HTML_TREND_REPORT_FILENAME, "Trend Report")
-line = ["Symbol ",  today +" Close","Recommendation", "ADX > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2", "MACD Diff" ,"ADXR", "RSI", "J"]
+line = ["Symbol ",  today +" Close", today + " High", today + "Low", "10-Day High", "10-Day Low", " Recommendation", "ADX > 25", "Cross SMA20", "Cross SMA50", "Cross SMA100", "Cross Bollinger", "Abover SMA20", "Above SMA50", "Above SMA100", "Above Bollinger 1", "Between Bollinger 1 & 2", "MACD Diff" ,"ADXR", "RSI", "J"]
 rm.AddLineToHTMLTable(param.HTML_TREND_REPORT_FILENAME, line)
 
 for symbol in symbols:    
@@ -205,7 +205,7 @@ for symbol in symbols:
         for _ in [isadx,issma20, issma50, issma100, isbollinger]:
             if(_):
                 counter = counter + 1
-        line = [symbol, quote.Close[-1], counter, isadx, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2, macd_r, adxr,rsi,j]
+        line = [symbol, quote.Close[-1], quote.High[-1], quote.Low[-1], max(quote.High[len(quote.High)-10:-1]), min(quote.Low[len(quote.Low)-10:-1]),counter, isadx, issma20, issma50, issma100, isbollinger, isAboveSMA20, isAboveSMA50, isAboveSMA100, isAboveBollinger1, isBelowBollinger2, macd_r, adxr,rsi,j]
         rm.AddLineToHTMLTable2(param.HTML_TREND_REPORT_FILENAME, line)        
 
     else:

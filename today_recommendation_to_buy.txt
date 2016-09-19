@@ -1,4 +1,7 @@
-2016/09/13	ONXEO.CO has the recommendation of 1.25611634763
-2016/09/13	COLUM.CO has the recommendation of 1.12045844033
-2016/09/13	TOTA.CO has the recommendation of 1.4252817726
-2016/09/13	TPSL.CO has the recommendation of 1.08430336162
+2016/09/19	BO.CO has the recommendation of 1.36111324172
+2016/09/19	CPHCAP.CO has the recommendation of 1.4700871357
+2016/09/19	LOLB.CO has the recommendation of 1.22486520746
+2016/09/19	NRDF.CO has the recommendation of 1.13285299678
+2016/09/19	ROV.CO has the recommendation of 1.22728877784
+2016/09/19	TPSL.CO has the recommendation of 1.0933415164
+2016/09/19	AUD=X has the recommendation of 1.44753202615
